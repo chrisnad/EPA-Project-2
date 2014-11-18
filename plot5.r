@@ -4,6 +4,11 @@ SCC <- readRDS("Source_Classification_Code.rds")
 keep <- SCC$SCC[grepl("Vehicle", SCC$Short.Name)]
 Mot_Vehicle <- NEI[NEI$SCC %in% keep, ]     #keep only the rows that relates to Vehicles
                                             #Combustion
+
+Mot_Vehicle <- Mot_Vehicle[Mot_Vehicle$fips == "24510", ]
+                                            #from Mot_Vehicle keep the data from Baltimore
+                                            #only
+
 library(dplyr)
 library(ggplot2)
 
@@ -15,6 +20,7 @@ part5 <- Mot_Vehicle %>%                    #using the "dplyr" package to get a 
 g <- ggplot(part5, aes(year, tot_Em))
 p <- g + 
   geom_line(size = 1) + 
-  labs(x = "Year", y = "Emissions from motor vehicle sources")
+  labs(x = "Year", 
+       y = "Emissions from motor vehicle sources in Baltimore")
 
 ggsave(filename = "plot5.png", plot = p)

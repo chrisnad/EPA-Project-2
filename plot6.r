@@ -14,8 +14,8 @@ data$fips[data$fips == "24510"] <- "Baltimore City"
 library(dplyr)
 library(ggplot2)
 
-part6 <- data %>%                    #using the "dplyr" package to get a data frame
-  select(fips, Emissions, year) %>%               #of the sum of Emissions over all SCC per year
+part6 <- data %>%                           #using the "dplyr" package to get a data frame
+  select(fips, Emissions, year) %>%         #of the sum of Emissions over all SCC per year
   group_by(fips, year) %>% 
   summarise(tot_Em = sum(Emissions))
 
